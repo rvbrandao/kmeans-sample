@@ -35,7 +35,12 @@ kmeans = KMeans(n_clusters=4, random_state=42)
 clusters = kmeans.fit_predict(X_scaled)
 data['cluster'] = clusters
 
-data.to_csv('user_behavior_vector.csv', index=False)
+data.to_csv("user_behavior_vector_br.csv", 
+            sep=';',             # separador de colunas (Excel BR)
+            decimal=',',         # separador decimal
+            index=False,         # evita salvar o índice numérico
+            encoding='utf-8')    # ou 'utf-8-sig' para evitar bugs no Excel antigo
+
 joblib.dump(kmeans, 'kmeans_model.pkl')
 
 # Visualização 2D usando PCA para simplificar

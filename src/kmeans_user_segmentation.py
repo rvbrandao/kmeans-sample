@@ -44,5 +44,9 @@ joblib.dump(kmeans, f"kmeans_model_{today}.pkl")
 joblib.dump(scaler, f"scaler_{today}.pkl")
 
 # === Passo 6: Exportar resultado para CSV (ou BigQuery) ===
-data[["user_id", "cluster_behavior", "cluster_name"] + features].to_csv("clustered_users.csv", index=False)
+data[["user_id", "cluster_behavior", "cluster_name"] + features].to_csv("clustered_users.csv", 
+            sep=';',             # separador de colunas (Excel BR)
+            decimal=',',         # separador decimal
+            index=False,         # evita salvar o índice numérico
+            encoding='utf-8')    # ou 'utf-8-sig' para evitar bugs no Excel antigo
 print("Clusterização concluída. Resultados salvos em clustered_users.csv")
