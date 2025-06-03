@@ -7,13 +7,13 @@ import seaborn as sns
 
 # Simulação de dados de comportamento de usuários de apostas
 np.random.seed(42)
-n_users = 200
+n_users = 1000  # número de usuários
 
 # Simulando os vetores
 data = pd.DataFrame({
     'user_id': [f'U{i:03d}' for i in range(n_users)],
     'total_bets': np.random.gamma(2, 1500, n_users),  # apostas totais
-    'freq_bets': np.random.poisson(20, n_users),      # frequência de apostas no mês
+    'freq_bets': np.random.poisson(25, n_users),      # frequência de apostas no mês
     'perc_sports': np.clip(np.random.normal(0.6, 0.3, n_users), 0, 1),  # % em esportes
     'perc_casino': 0,  # será 1 - perc_sports
     'avg_deposit': np.random.gamma(2, 400, n_users),
@@ -51,3 +51,5 @@ plt.legend(title='Cluster')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+data.to_csv('user_behavior_vector.csv', index=False)
