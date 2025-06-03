@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
@@ -34,6 +35,9 @@ kmeans = KMeans(n_clusters=4, random_state=42)
 clusters = kmeans.fit_predict(X_scaled)
 data['cluster'] = clusters
 
+data.to_csv('user_behavior_vector.csv', index=False)
+joblib.dump(kmeans, 'kmeans_model.pkl')
+
 # Visualização 2D usando PCA para simplificar
 from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
@@ -52,4 +56,3 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-data.to_csv('user_behavior_vector.csv', index=False)

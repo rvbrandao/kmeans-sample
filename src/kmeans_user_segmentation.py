@@ -9,13 +9,13 @@ import datetime
 
 # === Passo 1: Carregar dados ===
 # Simulando leitura de BigQuery. Na prática, você carregaria via 'pandas_gbq.read_gbq' ou outro meio.
-data = pd.read_csv("user_behavior_vector.csv")  # Supondo que já tenha gerado essa tabela
+data = pd.read_csv("user_behavior_vector.csv", header=0)  # Supondo que já tenha gerado essa tabela
 user_ids = data["user_id"]
 
 # === Passo 2: Selecionar e normalizar as features ===
 features = [
     "total_bets", "freq_bets", "perc_sports", "perc_casino",
-    "perc_crash_games", "perc_slots", "avg_deposit", "avg_withdraw", "active_days"
+    "avg_deposit", "avg_withdraw", "active_days"
 ]
 X = data[features].fillna(0)
 scaler = StandardScaler()
